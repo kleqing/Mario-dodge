@@ -46,12 +46,12 @@ public class Player_Movement : MonoBehaviour
         //* Wall Jump
         if (wallJumpCooldown > 0.2f)
         {
-            body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
+            body.linearVelocity = new Vector2(horizontalInput * speed, body.linearVelocity.y);
             
             if (onWall() && !isGrounded())
             {
                 body.gravityScale = 0;
-                body.velocity = Vector2.zero;
+                body.linearVelocity = Vector2.zero;
             }
             else
             {
@@ -74,7 +74,7 @@ public class Player_Movement : MonoBehaviour
     {
         if (isGrounded())
         {
-            body.velocity = new Vector2(body.velocity.x, jumpPower);
+            body.linearVelocity = new Vector2(body.linearVelocity.x, jumpPower);
             animator.SetTrigger("Jump");
         }
         else if (onWall() && !isGrounded())
@@ -83,7 +83,7 @@ public class Player_Movement : MonoBehaviour
             if (horizontalInput == 0 )
             {
                 //* IF the player want to get out from the wall, the player will jump up with 0 units, and the player will jump to the left or right with 10 units.
-                body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 10, 0);
+                body.linearVelocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 10, 0);
                 //* The player will jump up with 0 units, make sure that when the player jump from left/right -> right/left (get out from the wall)
                 //* the player will not throw up. (Y axis)
                 transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y,
@@ -93,7 +93,7 @@ public class Player_Movement : MonoBehaviour
             }
             else
             {
-                body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
+                body.linearVelocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
             }
             wallJumpCooldown = 0;
             //* Think simple, Mathf.Sign will return 1 if the player is facing right, -1 if the player is facing left.
