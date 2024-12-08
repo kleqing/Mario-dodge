@@ -31,14 +31,28 @@ public class Health : MonoBehaviour
 	    if (currentHealth > 0)
 	    {
 		    _animator.SetTrigger("Hurt");
-		    StartCoroutine(Invunerability());
+		    StartCoroutine(Invunerability()); //* NOTE: To call an IEnumerator, you need to use StartCoroutine. Otherwise, it won't work
 	    }
 	    else
 	    {
 		    if (!dead)
 		    {
-			    _animator.SetTrigger("Die"); 
-			    GetComponent<Player_Movement>().enabled = false; //* Disable player movement when dead
+			    _animator.SetTrigger("Die");
+			    if (GetComponent<Player_Movement>() != null)
+			    {
+				    GetComponent<Player_Movement>().enabled = false; //* Disable player movement when dead
+			    }
+			    
+			    //* Enemy death
+			    if (GetComponentInParent<Patrolling>() != null)
+			    {
+				    GetComponentInParent<Patrolling>().enabled = false; //* Disable patrolling when dead
+
+			    }
+			    if (GetComponent<Knight>() != null)
+			    {
+				    GetComponent<Knight>().enabled = false; //* Disable knight when dead
+			    }
 			    dead = true;
 		    }
 	    }
@@ -48,6 +62,7 @@ public class Health : MonoBehaviour
     {
 	    currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
     }
+    
     
     private IEnumerator Invunerability() //! NOTE: IEnumerator is a coroutine. And type correct, not IEnumberable!!!
 	{

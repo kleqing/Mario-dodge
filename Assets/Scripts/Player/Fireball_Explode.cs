@@ -42,6 +42,11 @@ public class Fireball_Explode : MonoBehaviour
         hit = true;
         boxCollider2D.enabled = false;
         animator.SetTrigger("Explode");
+
+        if (other.tag == "Enemy")
+        {
+            other.GetComponent<Health>().TakeDamage(1);
+        }
         
     }
 
