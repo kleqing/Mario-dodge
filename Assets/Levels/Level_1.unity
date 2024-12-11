@@ -10222,6 +10222,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4074147149395918186, guid: 11cfe3f57a487b744ac3ab879a56d1a5, type: 3}
+      propertyPath: arrowSound
+      value: 
+      objectReference: {fileID: 8300000, guid: c2cd463919aa6384f8621c454eba7d2a, type: 3}
     - target: {fileID: 5477791929594326690, guid: 11cfe3f57a487b744ac3ab879a56d1a5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -10493,6 +10497,14 @@ PrefabInstance:
     - target: {fileID: 4155261846331176317, guid: 82a02136cc7fc4b438794fa034c78159, type: 3}
       propertyPath: m_Name
       value: FireTrap
+      objectReference: {fileID: 0}
+    - target: {fileID: 5406392341067464560, guid: 82a02136cc7fc4b438794fa034c78159, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5406392341067464560, guid: 82a02136cc7fc4b438794fa034c78159, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -783111885
       objectReference: {fileID: 0}
     - target: {fileID: 5788393250056450762, guid: 82a02136cc7fc4b438794fa034c78159, type: 3}
       propertyPath: m_LocalPosition.x
