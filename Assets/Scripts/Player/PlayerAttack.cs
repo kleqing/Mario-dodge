@@ -12,7 +12,8 @@ public class PlayerAttack : MonoBehaviour
     private Animator animator;
     private Player_Movement _playerMovement;
     private float cooldownTimer = Mathf.Infinity; // * Set to infinity to avoid attacking at the start of the game
-    
+
+    [SerializeField] private AudioClip fireballSound;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -32,6 +33,9 @@ public class PlayerAttack : MonoBehaviour
     
     private void Attack()
     {
+        // * Play sound
+        SoundManager.Instance.PlaySound(fireballSound);
+        
         animator.SetTrigger("Attack");
         cooldownTimer = 0;
         

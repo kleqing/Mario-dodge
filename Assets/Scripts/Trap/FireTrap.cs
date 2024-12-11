@@ -10,7 +10,12 @@ public class FireTrap : MonoBehaviour
     
     [SerializeField] private float ActivationTime;
     [SerializeField] private float ActiveTime;
-
+    
+    private Health playerHealth;
+    
+    [Header("SFX")]
+    [SerializeField] private AudioClip trapSound;
+    
     private Animator animator;
     private SpriteRenderer spriteRenderer;
 
@@ -23,6 +28,14 @@ public class FireTrap : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    private void Update()
+    {
+        if (playerHealth != null && isActive)
+        {
+            playerHealth.TakeDamage(damage);
+        }
+    }
+
     private IEnumerator ActivateTrap()
     {
         //* Turn the sprite red to notify when the trap is activated
@@ -31,6 +44,9 @@ public class FireTrap : MonoBehaviour
         
         //* Wait for the activation time, turn on animation and activate the trap
         yield return new WaitForSeconds(ActivationTime);
+        
+        SoundManager.Instance.PlaySound(trapSound);
+        
         spriteRenderer.color = Color.white;
         isActive = true;
         animator.SetBool("Active", true);
@@ -47,6 +63,9 @@ public class FireTrap : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            
+            playerHealth = other.GetComponent<Health>();
+            
             if (!isTrigger)
             {
                 StartCoroutine(ActivateTrap());
@@ -56,6 +75,14 @@ public class FireTrap : MonoBehaviour
             {
                 other.GetComponent<Health>().TakeDamage(damage);
             }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            playerHealth = null;
         }
     }
 }

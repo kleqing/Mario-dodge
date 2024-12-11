@@ -164,6 +164,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2315967970362412987, guid: d9f9bf22cb1ff0c49b6043fc7c128df4, type: 3}
+      propertyPath: AttackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 349d8f4d213aff146bb41dc439905737, type: 3}
+    - target: {fileID: 2315967970362412987, guid: d9f9bf22cb1ff0c49b6043fc7c128df4, type: 3}
       propertyPath: playerLayer.m_Bits
       value: 256
       objectReference: {fileID: 0}
@@ -171,6 +175,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Knight
       objectReference: {fileID: 0}
+    - target: {fileID: 8757332113159394951, guid: d9f9bf22cb1ff0c49b6043fc7c128df4, type: 3}
+      propertyPath: hurtSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 03c53c8c22370a2488a86fcbba85c9db, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

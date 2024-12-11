@@ -24,6 +24,9 @@ public class Knight : MonoBehaviour
     
     private Patrolling patrolling;
 
+    [Header("Sound")] 
+    [SerializeField] private AudioClip AttackSound;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -37,10 +40,11 @@ public class Knight : MonoBehaviour
         //* Attack only if see the player
         if (PlayerInSight())
         {
-            if (cooldownTimer >= attackCooldown)
+            if (cooldownTimer >= attackCooldown && playerHealth.currentHealth > 0)
             {
                 cooldownTimer = 0;
                 animator.SetTrigger("Attack");
+                SoundManager.Instance.PlaySound(AttackSound);
             }
         }
 
