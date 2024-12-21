@@ -46,34 +46,27 @@ public class Player_Movement : MonoBehaviour
         animator.SetBool("Run", horizontalInput != 0);
         animator.SetBool("Ground", isGrounded());
 
-        //* Wall Jump
-        if (wallJumpCooldown > 0.2f)
+        // Jump
+        if (Input.GetButtonDown("Jump"))
         {
-            body.linearVelocity = new Vector2(horizontalInput * speed, body.linearVelocity.y);
-            
-            if (onWall() && !isGrounded())
-            {
-                body.gravityScale = 0;
-                body.linearVelocity = Vector2.zero;
-            }
-            else
-            {
-                body.gravityScale = 2;
-            }
-            
-            if (Input.GetKey(KeyCode.Space))
-            {
-                Jump();
-                if (isGrounded() && Input.GetKeyDown(KeyCode.Space))
-                {
-                    SoundManager.Instance.PlaySound(jumpSound);
+            Jump();
+        }
+        
+        //* Adjust jump height
+        if (Input.GetKeyUp(KeyCode.Space) && body.linearVelocity.y > 0)
+        {
+            body.linearVelocity = new Vector2(body.linearVelocity.x, body.linearVelocity.y / 2);
+        }
 
-                } ;
-            }
+        if (onWall())
+        {
+            body.gravityScale = 0;
+            body.linearVelocity = Vector2.zero;
         }
         else
         {
-            wallJumpCooldown += Time.deltaTime;
+            body.gravityScale = 1;
+            body.linearVelocity = new Vector2(horizontalInput * speed, body.linearVelocity.y);
         }
     }
 
@@ -83,7 +76,7 @@ public class Player_Movement : MonoBehaviour
         if (isGrounded())
         {
             body.linearVelocity = new Vector2(body.linearVelocity.x, jumpPower);
-            animator.SetTrigger("Jump");
+            SoundManager.Instance.PlaySound(jumpSound);
         }
         else if (onWall() && !isGrounded())
         {

@@ -92,4 +92,19 @@ public class Health : MonoBehaviour
 	    Physics2D.IgnoreLayerCollision(10, 11, false); //* Vunerable again
 		invunable = false;
 	}
+    
+    public void Respawn()
+	{
+		dead = false;
+		AddHealth(startingHealth);
+		_animator.ResetTrigger("Die");
+		_animator.SetTrigger("Idle");
+		StartCoroutine(Invunerability());
+
+		foreach (var Behaviour in GetComponents<MonoBehaviour>())
+		{
+			Behaviour.enabled = true;
+		}
+
+	}
 }
